@@ -1,0 +1,49 @@
+{
+  "name": "websharks/woocommerce-intercom",
+  "homepage": "https://github.com/websharks/woocommerce-intercom",
+  "description": "WooCommerce Intercom Pro plugin for WordPress.",
+  "keywords": ["websharks", "wpsharks", "woocommerce-intercom"],
+
+  "type": "project",
+  "license": "GPL-3.0+",
+
+  "authors": [{
+    "name": "wpsharks",
+    "homepage": "https://wpsharks.com",
+    "role": "company"
+  }, {
+    "name": "jaswsinc",
+    "homepage": "https://jaswsinc.com",
+    "role": "developer"
+  }, {
+    "name": "raamdev",
+    "homepage": "https://raamdev.com/",
+    "role": "developer"
+  }],
+
+  "support": {
+    "source": "https://github.com/websharks/woocommerce-intercom",
+    "issues": "https://github.com/websharks/woocommerce-intercom/issues"
+  },
+
+  "require-dev": {},
+
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+
+  "autoload": {
+    "psr-4": {
+      "WebSharks\\WpSharks\\WooCommerceIntercom\\Classes\\": "src/includes/classes",
+      "WebSharks\\WpSharks\\WooCommerceIntercom\\Functions\\": "src/includes/functions",
+      "WebSharks\\WpSharks\\WooCommerceIntercom\\Interfaces\\": "src/includes/interfaces",
+      "WebSharks\\WpSharks\\WooCommerceIntercom\\Traits\\": "src/includes/traits"
+    }
+  },
+
+  "config": {
+    "vendor-dir": "src/vendor",
+    "preferred-install": "dist"
+  },
+
+  "repositories": []
+}
