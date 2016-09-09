@@ -102,11 +102,18 @@ class JsSnippet extends SCoreClasses\SCore\Base\Core
         if (is_user_logged_in()) { // Only logged-in users
             $current_user = wp_get_current_user();
 
+            $available_downloads = ''; // Initialize.
+            if (!empty($_wc_downloads = wc_get_customer_available_downloads($current_user->ID))) {
+                foreach ($_wc_downloads as $_download) {
+                    $available_downloads[] = $_download['file']['name'];
+                }
+            } unset($_wc_downloads, $_download); // Housekeeping.
+
             return [ // Intercom Custom Attributes http://bit.ly/2aZvEtb
                      'wp_login'            => $current_user->user_login,
                      'wp_user_edit'        => admin_url('user-edit.php?user_id='.$current_user->ID),
-                     'available_downloads' => !empty(wc_get_customer_available_downloads($current_user->ID)) ? c::clip(implode(', ', wc_get_customer_available_downloads($current_user->ID)), 255) : '',
-                     'total_spent'         => !empty(wc_get_customer_total_spent($current_user->ID)) ? (float) wc_get_customer_total_spent($current_user->ID) : 0.00,
+                     'available_downloads' => c::clip(implode(', ', $available_downloads), 255),
+                     'total_spent'         => sprintf('%0.2f', (float) wc_get_customer_total_spent($current_user->ID)), // Padded value to 2 decimal places, e.g. 0.00 or 5.50.
                      'total_orders'        => wc_get_customer_order_count($current_user->ID),
                      'wp_roles'            => c::clip(implode(', ', $current_user->roles), 255),
 
