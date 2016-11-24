@@ -5,7 +5,7 @@
  * @author @raamdev
  * @copyright WP Sharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\WooCommerceIntercom\Classes;
 
 use WebSharks\WpSharks\WooCommerceIntercom\Classes;
@@ -31,23 +31,23 @@ use function get_defined_vars as vars;
 /**
  * Application.
  *
- * @since 000000 Initial release.
+ * @since 160909.7530 Initial release.
  */
 class App extends SCoreClasses\App
 {
     /**
      * Version.
      *
-     * @since 000000
+     * @since 160909.7530
      *
      * @var string Version.
      */
-    const VERSION = '160909.7530'; //v//
+    const VERSION = '161124.6961-RC'; //v//
 
     /**
      * Constructor.
      *
-     * @since 000000 Initial release.
+     * @since 160909.7530 Initial release.
      *
      * @param array $instance Instance args.
      */
@@ -85,8 +85,12 @@ class App extends SCoreClasses\App
 
             '§pro_option_keys' => [],
             '§default_options' => [
-                'app_id'  => '',
-                'api_key' => '',
+                'app_id'    => '',
+                'api_token' => '',
+                'api_key'   => '',
+
+                'uri_inclusions' => '^/**$',
+                'uri_exclusions' => '',
             ],
 
             '§conflicts' => [
@@ -123,7 +127,7 @@ class App extends SCoreClasses\App
     /**
      * Early hook setup handler.
      *
-     * @since 000000 Initial release.
+     * @since 160909.7530 Initial release.
      */
     protected function onSetupEarlyHooks()
     {
@@ -133,7 +137,7 @@ class App extends SCoreClasses\App
     /**
      * Other hook setup handler.
      *
-     * @since 000000 Initial release.
+     * @since 160909.7530 Initial release.
      */
     protected function onSetupOtherHooks()
     {
@@ -143,6 +147,9 @@ class App extends SCoreClasses\App
 
         add_action('woocommerce_order_given', [$this->Utils->Events, 'onWcOrderGiven']);
         add_action('woocommerce_order_status_changed', [$this->Utils->Events, 'onWcOrderStatusChanged'], 10, 3);
+
+        add_action('woocommerce_subscription_status_changed', [$this->Utils->Events, 'onWcSubscriptionStatusChanged'], 10, 3);
+        add_action('woocommerce_subscriptions_switched_item', [$this->Utils->Events, 'onWcSubscriptionItemSwitched'], 1000, 3);
 
         add_action('wp_footer', [$this->Utils->JsSnippet, 'onWpFooter']);
     }
