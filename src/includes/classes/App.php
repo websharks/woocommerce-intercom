@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @var string Version.
      */
-    const VERSION = '161124.6961-RC'; //v//
+    const VERSION = '161209.85885'; //v//
 
     /**
      * Constructor.
@@ -87,10 +87,11 @@ class App extends SCoreClasses\App
             '§default_options' => [
                 'app_id'    => '',
                 'api_token' => '',
-                'api_key'   => '',
 
-                'uri_inclusions' => '^/**$',
+                'uri_inclusions' => '',
                 'uri_exclusions' => '',
+
+                'display_if_logged' => 'in-or-out',
             ],
 
             '§conflicts' => [
